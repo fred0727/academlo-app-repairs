@@ -1,3 +1,4 @@
+const Error = require('../models/error.model');
 const AppError = require('../utils/appError');
 
 const handleCastError22001 = () =>
@@ -16,6 +17,11 @@ const handleJWTExpireError = () =>
   new AppError('Yoyr token has expired!, Please login again', 401);
 
 const sendErrorDev = (err, res) => {
+  Error.create({
+    status: err.status,
+    message: err.message,
+    stack: err.stack,
+  });
   return res.status(err.statusCode).json({
     status: err.status,
     message: err.message,

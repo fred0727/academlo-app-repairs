@@ -16,6 +16,9 @@ router
 router.use(authMiddleware.restricTo('employee'));
 router.route('/').get(repairController.findAllRepairs);
 
+router.get('/pending', repairController.pendingServices);
+router.get('/completed', repairController.completedServices);
+
 router
   .use('/:id', repairMiddleware.validateStatusRepair)
   .route('/:id')

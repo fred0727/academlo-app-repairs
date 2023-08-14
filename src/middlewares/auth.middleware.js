@@ -54,6 +54,16 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+exports.protectAccountOwner = (req, res, next) => {
+  const { user, sessionUser } = req;
+
+  if (user.id !== sessionUser.id) {
+    return next(new AppError('You do not ow this account', 401));
+  }
+
+  next();
+};
+
 exports.restricTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.sessionUser.role)) {

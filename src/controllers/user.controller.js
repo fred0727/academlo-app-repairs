@@ -18,7 +18,7 @@ exports.findAllUsers = catchAsync(async (req, res) => {
 });
 
 exports.findOneUser = catchAsync(async (req, res) => {
-  const { user } = req.params;
+  const { user } = req;
 
   return res.status(200).json({
     status: 'success',
@@ -53,7 +53,7 @@ exports.createUser = catchAsync(async (req, res) => {
 });
 
 exports.updateUser = catchAsync(async (req, res) => {
-  const { user } = req.params;
+  const { user } = req;
   const { name, email } = req.body;
 
   await user.update({
@@ -69,7 +69,7 @@ exports.updateUser = catchAsync(async (req, res) => {
 });
 
 exports.deleteUser = catchAsync(async (req, res) => {
-  const { user } = req.params;
+  const { user } = req;
 
   await user.update({
     status: 'disable',
